@@ -4,17 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web</title>
+    <title>Wawi Spot - Bandeja Sanitaria Natural para Mascotas</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
     <header>
-        <h1>Bienvenido a Mi Página Web</h1>
+        <nav>
+            <div class="logo">Wawi Spot</div>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#producto">Producto</a></li>
+                <li><a href="#beneficios">Beneficios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
+
     <main>
-        <p>Esta es una página web estática creada en Visual Studio Code.</p>
+        <section id="inicio" class="hero">
+            <h1>Wawi Spot</h1>
+            <h2>La naturaleza en la comodidad de tu hogar</h2>
+            <p>Bandeja sanitaria con pasto natural para tu mascota</p>
+            <a href="#producto" class="cta-button">¡Conoce más!</a>
+        </section>
+
+        <section id="producto" class="producto">
+            <h2>Nuestro Producto</h2>
+            <div class="producto-info">
+                <img src="img/wawi-spot-producto.jpg" alt="Wawi Spot Bandeja Sanitaria">
+                <div class="descripcion">
+                    <h3>Bandeja Sanitaria Natural</h3>
+                    <p>Wawi Spot combina la frescura del exterior con la comodidad de tu hogar.</p>
+                    <ul>
+                        <li>✔️ Pasto 100% natural</li>
+                        <li>✔️ Fácil de mantener</li>
+                        <li>✔️ Ecológico</li>
+                        <li>✔️ Delivery a domicilio</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="beneficios" class="beneficios">
+            <h2>Beneficios</h2>
+            <div class="beneficios-grid">
+                <div class="beneficio-card">
+                    <img src="img/perro-feliz1.jpg" alt="Perro feliz">
+                    <h3>Natural</h3>
+                    <p>Tu mascota disfrutará de un espacio natural dentro de casa</p>
+                </div>
+                <div class="beneficio-card">
+                    <img src="img/perro-feliz2.jpg" alt="Perro jugando">
+                    <h3>Higiénico</h3>
+                    <p>Mantén tu hogar limpio y libre de olores</p>
+                </div>
+                <div class="beneficio-card">
+                    <img src="img/delivery.jpg" alt="Servicio delivery">
+                    <h3>Delivery</h3>
+                    <p>Recibe tu Wawi Spot directamente en tu puerta</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contacto">
+            <h2>¡Haz tu pedido!</h2>
+            <form id="pedido-form">
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Teléfono" required>
+                <textarea placeholder="Mensaje" required></textarea>
+                <button type="submit">Enviar Pedido</button>
+            </form>
+        </section>
     </main>
+
+    <footer>
+        <p>© 2024 Wawi Spot - Todos los derechos reservados</p>
+    </footer>
+
     <script src="js/script.js"></script>
 </body>
 
