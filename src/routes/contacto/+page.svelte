@@ -27,21 +27,22 @@
       'grande': 'Grande (80 x 60 cm)'
     }[formData.tamano];
     
-    // Crear mensaje sin emojis pero con formato claro
+    // Codificar emojis correctamente para URL
+    // Crear el mensaje con formato mejorado usando códigos de escape Unicode para emojis
     const mensaje = encodeURIComponent(
-      `*SOLICITUD WAWI SPOT*\n\n`
-      + `------------------------\n`
-      + `*DATOS DE CONTACTO*\n`
-      + `*Nombre:* ${formData.nombre}\n`
-      + `*Email:* ${formData.email}\n`
-      + `*Teléfono:* ${formData.telefono || 'No proporcionado'}\n`
-      + `------------------------\n`
-      + `*DETALLES DEL PEDIDO*\n`
-      + `*Interés:* ${interesSeleccionado}\n`
-      + `*Tamaño:* ${tamanoTexto}\n`
-      + `------------------------\n`
-      + `*MENSAJE*\n${formData.mensaje}\n`
-      + `------------------------\n`
+      `🐾 *SOLICITUD WAWI SPOT* 🐾\n\n`
+      + `━━━━━━━━━━━━━━━━━━━━━\n`
+      + `👤 *DATOS DE CONTACTO*\n`
+      + `📝 *Nombre:* ${formData.nombre}\n`
+      + `📧 *Email:* ${formData.email}\n`
+      + `📱 *Teléfono:* ${formData.telefono || 'No proporcionado'}\n`
+      + `━━━━━━━━━━━━━━━━━━━━━\n`
+      + `🛒 *DETALLES DEL PEDIDO*\n`
+      + `🔍 *Interés:* ${interesSeleccionado}\n`
+      + `📏 *Tamaño:* ${tamanoTexto}\n`
+      + `━━━━━━━━━━━━━━━━━━━━━\n`
+      + `💬 *MENSAJE*\n${formData.mensaje}\n`
+      + `━━━━━━━━━━━━━━━━━━━━━\n`
       + `Enviado desde wawispot.com`
     );
     
