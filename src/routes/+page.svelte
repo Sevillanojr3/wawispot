@@ -6,17 +6,17 @@
   let visible = false;
   let testimonials = [
     {
-      name: "Carlos Rodríguez",
+      name: "Marina Sanchez",
       text: "Mi perro adora su Wawi Spot. Ya no tengo que preocuparme por los olores en casa.",
       image: "/img/testimonial1.jpg"
     },
     {
-      name: "María González",
+      name: "Angie Ramós",
       text: "La mejor inversión para mi mascota. El pasto natural es mucho mejor que las alternativas sintéticas.",
       image: "/img/testimonial2.jpg"
     },
     {
-      name: "Juan Pérez",
+      name: "Gustavo Villalaz",
       text: "El servicio de entrega es excelente y mi gato se adaptó rápidamente a su nueva bandeja.",
       image: "/img/testimonial3.jpg"
     }

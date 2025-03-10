@@ -29,13 +29,13 @@
   const testimonials = [
     {
       quote: "Mi gato solía tener problemas respiratorios con la arena tradicional. Desde que usamos Wawi Spot, sus problemas han desaparecido por completo.",
-      author: "Ana Martínez",
+      author: "Marina Sanchez",
       image: "/img/testimonial1.jpg"
     },
     {
       quote: "La diferencia en los olores es increíble. Mi apartamento ya no huele a bandeja sanitaria, y mi perro parece mucho más feliz.",
-      author: "Roberto Sánchez",
-      image: "/img/testimonial2.jpg"
+      author: "Rolando Flores",
+      image: "/img/testimonial4.jpg"
     }
   ];
   
