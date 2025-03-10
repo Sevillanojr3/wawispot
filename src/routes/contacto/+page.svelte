@@ -19,8 +19,36 @@
   });
   
   function handleSubmit() {
-    // Aquí iría la lógica para enviar el formulario
-    console.log('Formulario enviado:', formData);
+    // Preparar el mensaje para WhatsApp
+    const interesSeleccionado = formData.interes.length > 0 ? formData.interes.join(', ') : 'No especificado';
+    const tamanoTexto = {
+      'pequeno': 'Pequeño (40 x 30 cm)',
+      'mediano': 'Mediano (60 x 40 cm)',
+      'grande': 'Grande (80 x 60 cm)'
+    }[formData.tamano];
+    
+    // Crear mensaje sin emojis pero con formato claro
+    const mensaje = encodeURIComponent(
+      `*SOLICITUD WAWI SPOT*\n\n`
+      + `------------------------\n`
+      + `*DATOS DE CONTACTO*\n`
+      + `*Nombre:* ${formData.nombre}\n`
+      + `*Email:* ${formData.email}\n`
+      + `*Teléfono:* ${formData.telefono || 'No proporcionado'}\n`
+      + `------------------------\n`
+      + `*DETALLES DEL PEDIDO*\n`
+      + `*Interés:* ${interesSeleccionado}\n`
+      + `*Tamaño:* ${tamanoTexto}\n`
+      + `------------------------\n`
+      + `*MENSAJE*\n${formData.mensaje}\n`
+      + `------------------------\n`
+      + `Enviado desde wawispot.com`
+    );
+    
+    // Abrir WhatsApp con el mensaje
+    window.open(`https://wa.me/50764229334?text=${mensaje}`, '_blank');
+    
+    // Mostrar confirmación
     formSubmitted = true;
     
     // Resetear el formulario después de 5 segundos
@@ -77,7 +105,7 @@
             
             {#if formSubmitted}
               <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6" transition:fade>
-                <p>¡Gracias por tu mensaje! Te contactaremos pronto.</p>
+                <p>¡Gracias por tu mensaje! Te hemos redirigido a WhatsApp para completar el envío.</p>
               </div>
             {/if}
             
