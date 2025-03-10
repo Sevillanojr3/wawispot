@@ -28,7 +28,7 @@
   
   const testimonials = [
     {
-      quote: "Mi gato solía tener problemas respiratorios con la arena tradicional. Desde que usamos Wawi Spot, sus problemas han desaparecido por completo.",
+      quote: "Mi perro siempre tenía problemas para adaptarse a los baños tradicionales. Con Wawi Spot, ahora tiene su espacio favorito y ya no hay accidentes en casa. ¡Es increíble!",
       author: "Marina Sanchez",
       image: "/img/testimonial1.jpg"
     },
