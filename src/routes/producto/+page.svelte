@@ -4,13 +4,31 @@
   
   let activeTab = 'descripcion';
   let visible = false;
+  let modelViewer;
+  let modelLoaded = false;
+  let selectedSize = 'shaq';
   
   onMount(() => {
     visible = true;
+    
+    // Cargar el script de model-viewer si no está cargado
+    if (!document.querySelector('script[src*="model-viewer"]')) {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = 'https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js';
+      script.onload = () => {
+        console.log('Model Viewer script cargado');
+      };
+      document.head.appendChild(script);
+    }
   });
   
   function setActiveTab(tab) {
     activeTab = tab;
+  }
+  
+  function selectSize(size) {
+    selectedSize = size;
   }
   
   const features = [
@@ -251,6 +269,81 @@
             Wawi Spot funciona de manera simple pero efectiva, proporcionando a tu mascota una experiencia natural mientras mantiene tu hogar limpio y libre de olores.
           </p>
           
+          <!-- Nueva sección 3D -->
+          <div class="mt-8 mb-10">
+            <h3 class="text-xl md:text-2xl font-semibold mb-5">Visualiza el Wawi Spot en 3D</h3>
+            
+            <div class="mb-5 flex flex-wrap gap-3">
+              <button 
+                class="px-4 py-2 rounded-full text-sm font-medium {selectedSize === 'shaq' ? 'bg-primary text-white' : 'bg-gray-200 hover:bg-gray-300'}"
+                on:click={() => selectSize('shaq')}
+              >
+                Paquete Shaq
+              </button>
+              <button 
+                class="px-4 py-2 rounded-full text-sm font-medium {selectedSize === 'balu' ? 'bg-primary text-white' : 'bg-gray-200 hover:bg-gray-300'}"
+                on:click={() => selectSize('balu')}
+              >
+                Paquete Balú
+              </button>
+              <button 
+                class="px-4 py-2 rounded-full text-sm font-medium {selectedSize === 'cooper' ? 'bg-primary text-white' : 'bg-gray-200 hover:bg-gray-300'}"
+                on:click={() => selectSize('cooper')}
+              >
+                Paquete Cooper
+              </button>
+            </div>
+            
+            <div class="h-80 md:h-96 bg-gray-100 rounded-lg shadow-lg overflow-hidden">
+              <model-viewer
+                bind:this={modelViewer}
+                src="/models/wawispot.glb"
+                alt="Modelo 3D de Wawi Spot"
+                auto-rotate
+                camera-controls
+                shadow-intensity="1"
+                style="width: 100%; height: 100%;"
+                exposure="0.5"
+                environment-image="neutral"
+                ar
+                ar-modes="webxr scene-viewer quick-look"
+                ar-scale="fixed"
+                ar-placement="floor"
+                poster="/img/{selectedSize}.jpg"
+                seamless-poster
+              >
+                <button 
+                  slot="ar-button" 
+                  class="ar-button absolute bottom-4 right-4 bg-primary text-white px-4 py-2 rounded-full flex items-center space-x-2 shadow-lg hover:bg-primary/90 transition-colors"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M3 7V5C3 3.89543 3.89543 3 5 3H7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M3 17V19C3 20.1046 3.89543 21 5 21H7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M21 7V5C21 3.89543 20.1046 3 19 3H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M21 17V19C21 20.1046 20.1046 21 19 21H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  <span>Ver en tu espacio</span>
+                </button>
+              </model-viewer>
+            </div>
+            
+            <div class="mt-4 space-y-3">
+              <p class="text-center text-gray-600 text-sm">
+                Interactúa con el modelo: Haz clic y arrastra para rotar, usa la rueda del ratón para hacer zoom
+              </p>
+              <div class="bg-primary/10 p-4 rounded-lg flex items-start md:items-center gap-3">
+                <svg class="w-6 h-6 text-primary flex-shrink-0 mt-1 md:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p class="text-sm text-gray-700">
+                  <span class="font-medium">¡Pruébalo en tu casa!</span> Visualiza cómo quedaría el Wawi Spot en tu hogar con realidad aumentada. Compatible con dispositivos móviles recientes. Simplemente toca el botón "Ver en tu espacio" y sigue las instrucciones.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4 mt-10">Pasos para usar tu Wawi Spot:</h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-10">
             <div class="text-center">
               <div class="bg-primary/10 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
