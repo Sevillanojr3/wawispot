@@ -44,8 +44,32 @@
     }
   ];
 
+  let modelLoaded = false;
+  let modelViewer;
+
   onMount(() => {
     visible = true;
+    
+    // Cargar el script de model-viewer
+    if (!document.querySelector('script[src*="model-viewer"]')) {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = 'https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js';
+      script.onload = () => {
+        console.log('Model Viewer script cargado');
+        if (modelViewer) {
+          modelViewer.addEventListener('load', () => {
+            console.log('Modelo cargado correctamente');
+            modelLoaded = true;
+          });
+          
+          modelViewer.addEventListener('error', (error) => {
+            console.error('Error cargando el modelo:', error);
+          });
+        }
+      };
+      document.head.appendChild(script);
+    }
     
     // Inicializar contador para estadísticas
     const counters = document.querySelectorAll('.counter');
@@ -148,11 +172,52 @@
   </div>
   
   <div class="absolute bottom-10 left-0 right-0 z-20 text-center hidden md:block">
-    <a href="#caracteristicas" class="text-white animate-bounce inline-block">
+    <a 
+      href="#caracteristicas" 
+      class="text-white animate-bounce inline-block"
+      aria-label="Desplazar hacia abajo para ver características"
+    >
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
       </svg>
     </a>
+  </div>
+</section>
+
+<!-- Después de la sección Hero y antes de la sección Características -->
+<section class="py-16 md:py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-10 md:mb-16 text-dark">Descubre <span class="text-primary">Wawi Spot</span> en 3D</h2>
+    
+    <div class="max-w-4xl mx-auto">
+      {#if visible}
+        <div 
+          class="h-80 md:h-96 bg-gray-100 rounded-lg shadow-lg overflow-hidden"
+          in:fade={{duration: 1000, delay: 200}}
+        >
+          {#if !modelLoaded}
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>
+            </div>
+          {/if}
+          <model-viewer
+            bind:this={modelViewer}
+            src="/models/wawispot.glb"
+            alt="Modelo 3D de Wawi Spot"
+            auto-rotate
+            camera-controls
+            shadow-intensity="1"
+            style="width: 100%; height: 100%;"
+            exposure="0.5"
+            environment-image="neutral"
+            on:load={() => modelLoaded = true}
+          ></model-viewer>
+        </div>
+        <p class="text-center mt-4 text-gray-600">
+          Interactúa con el modelo: Haz clic y arrastra para rotar, usa la rueda del ratón para hacer zoom
+        </p>
+      {/if}
+    </div>
   </div>
 </section>
 
